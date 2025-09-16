@@ -97,7 +97,18 @@ main {
 .input-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 12px;
+    margin-bottom: 30px;
+    position: relative;
+}
+.error-tag{
+    position: absolute;
+    color: red;
+    font-size: 13px;
+    top: 100%;
+    transform: translateY(-50%,-50%);
+    margin: 0;
+
+
 }
 
 .input-container label {
