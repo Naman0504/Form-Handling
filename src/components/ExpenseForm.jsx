@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Input from './Input'
+import SelectBox from './SelectBox'
 
 const ExpenseForm = ({ setExpenses }) => {
 
@@ -20,16 +22,16 @@ const ExpenseForm = ({ setExpenses }) => {
 
         console.log("Form", formData)
         const errorsData = {}
-        if(!formData.title){
+        if (!formData.title) {
             errorsData.title = "Title is required";
         }
-        if(!formData.category){
+        if (!formData.category) {
             errorsData.category = "Category is required";
         }
-        if(!formData.amount){
+        if (!formData.amount) {
             errorsData.amount = "amount is required";
         }
-        
+
         setErrors(errorsData)
         return errorsData;
 
@@ -40,8 +42,8 @@ const ExpenseForm = ({ setExpenses }) => {
         e.preventDefault();
 
         const validateResult = validate(expense);
-        console.log("Validation",validateResult)
-        if(Object.keys(validateResult).length) return;
+        console.log("Validation", validateResult)
+        if (Object.keys(validateResult).length) return;
 
         setExpenses((prevState) => [...prevState, { ...expense, id: crypto.randomUUID() }])
 
@@ -94,33 +96,14 @@ const ExpenseForm = ({ setExpenses }) => {
         // console.log(e.target)
         const { name, value } = e.target;
         setExpense((prevState) => ({ ...prevState, [name]: value }))
+        setErrors({})
     }
 
     return (
         <form className="expense-form" onSubmit={handleSubmit}>
-            <div className="input-container">
-                <label htmlFor="title">Title</label>
-                <input id="title" name="title" value={expense.title} onChange={handleChange} />
-                <p className='error-tag'>{errors.title}</p>
-
-            </div>
-            <div className="input-container">
-                <label htmlFor="category">Category</label>
-                <select id="category" name="category" value={expense.category} onChange={handleChange}>
-                    <option disabled="true" hidden>select category</option>
-                    <option value="grocery">Grocery</option>
-                    <option value="clothes">Clothes</option>
-                    <option value="bills">Bills</option>
-                    <option value="education">Education</option>
-                    <option value="medicine">Medicine</option>
-                </select>
-                <p className='error-tag'>{errors.category}</p>
-            </div>
-            <div className="input-container">
-                <label htmlFor="amount">Amount</label>
-                <input id="amount" name="amount" value={expense.amount} onChange={handleChange} />
-                <p className='error-tag'>{errors.amount}</p>
-            </div>
+            <Input label={"title"} id={"title"} name={"title"} value={expense.title} onChange={handleChange} error={errors.title} />
+            <SelectBox label={"category"} id={"category"} options={['Grocery', 'Clothes', 'Bills', 'Education', 'Medicine']} name={"amount"} value={expense.category} onChange={handleChange} error={errors.category} />
+            <Input label={"amount"} id={"amount"} name={"amount"} value={expense.amount} onChange={handleChange} error={errors.amount} />
             <button className="add-btn">Add</button>
         </form>
     )

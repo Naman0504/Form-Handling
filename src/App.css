@@ -97,13 +97,13 @@ main {
 .input-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     position: relative;
 }
 .error-tag{
     position: absolute;
     color: red;
-    font-size: 13px;
+    font-size: 11px;
     top: 100%;
     transform: translateY(-50%,-50%);
     margin: 0;
